@@ -1,13 +1,13 @@
-
-#include <cmath>
 using namespace std;
+#include <cmath>
+#include <iostream>
 class complexe {
 private:
     double Re;
     double Img;
 public:
     complexe() { // constructeur par defaut
-        this->Imp = 0.0;
+        this->Img = 0.0;
         this->Re = 0.0;
     }
     complexe(double Re, double Img) // constructeur avec parametre
@@ -15,34 +15,36 @@ public:
             this->Img = Img;
             this->Re = Re;
     }
-    complexe(complexe const& autre)  :Img(autre.Img), Re(autre.Re); {}
+    //complexe(complexe const& autre) :Img(autre.Img), Re(autre.Re); {}
     
-    void affichage()const {}
-    double module()const {}
-    complexe conjuge()const {}
-    complexe operator+(const complexe &autre){}
-    complexe operator+(const double ){ }
-    complexe operator*(const complexe &autre){}
+    void affichage()const;
+        double module()const;
+        complexe conjuge()const;
+        complexe operator+(const complexe& autre);
+        complexe operator+(const double);
+        complexe operator*(const complexe& autre);
 };
-void complexe::affichage()const {
-    if (this->img > 0)
+void complexe::affichage()const{
+    if (this->Img > 0)
     {
-        cout << this->Re << "+i" << this->Img;
+        cout<< this->Re << "+i" << this->Img<<"\n";
     }
     else
-        cout << this->Re << "-i" << -this->Img;
+        cout<< this->Re << "-i" << -this->Img << "\n";
 }
  
 double complexe::module()const {
-    return sqrt(pow(this->Re, 2) + pow(this->Img, 2));
+    double squareroot;
+    squareroot= sqrt(pow(this->Re, 2) + pow(this->Img, 2));
+    return squareroot;
 }
-complexe complexe::conjuge() {
+complexe complexe::conjuge()const {
     complexe nombre;
     nombre.Re = this->Re;
     nombre.Img = -this->Img;
     return  nombre;
 }
-complexe complexe::operator+(const complexe& autre) {
+complexe complexe::operator+(const complexe& autre){
     complexe somme;
     somme.Re = this->Re + autre.Re;
     somme.Img = this->Img + autre.Img;
@@ -59,4 +61,16 @@ complexe complexe::operator*(const complexe& autre) {
     produit.Re = this->Re * autre.Re - this->Img * autre.Img;
     produit.Img= this->Re * autre.Re + this->Img * autre.Img;
     return produit;
+}
+
+
+int main()
+{
+    complexe z2(7,-8);
+    complexe z1(4,5);
+    complexe z3;
+    complexe z4,z5;
+    cout << "le module : " <<z1.module() << "\n";
+    z1.affichage();
+    z2.affichage();
 }
