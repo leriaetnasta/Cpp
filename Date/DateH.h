@@ -12,5 +12,6 @@ public:
     int convert()const;
     bool Bxtil()const;
     int maxjourmois()const;
+    int comparer(const Heure& H)const;
 };
 

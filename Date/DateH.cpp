@@ -36,6 +36,19 @@ int DateH::maxjourmois() const
 	return max;
 }
 
+int DateH::comparer(const Heure& H) const
+{
+	if (this->convert() - H.convert() < 0) {
+		return -1;
+	}
+	else if (this->convert() - H.convert() > 0) {
+		return 1;
+	}
+	else {
+		return this->Heure::comparer(H);
+	}
+}
+
 void DateH::afficher() const
 {
 	if (j < 10) {
@@ -51,5 +64,26 @@ void DateH::afficher() const
 		cout << mois << "/" << a << endl;
 	}
 	Heure::afficher();
+}
+
+bool DateH::operator>(const DateH& d) const
+{
+	if (this->comparer() == 1) {
+		return true;
+	}
+	return false;
+}
+
+int DateH::convert() const
+{
+	int today;
+	if (this->Bxtil()) {
+		today += this->a * 366;
+	}
+	else {
+		today += this->a * 365;
+	}
+	today += this->mois * this->maxjourmois() + this->j;
+	return today;
 }
 
